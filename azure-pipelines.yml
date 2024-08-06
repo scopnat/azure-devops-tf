@@ -13,7 +13,7 @@ variables:
     tfFilesArtifactName: 'tf-files'
   
 pool:
-    vmImage: ubuntu-latest
+    vmImage: azure pipeline
   
 stages:
     - stage: 'Installation'
