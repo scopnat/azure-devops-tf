@@ -43,7 +43,7 @@ stages:
               inputs:
                  provider: azurerm
                  command: init
-                 backendServiceArm: 'PathikRawal'
+                 backendServiceArm: 'azure-devops'
                  backendAzureRmResourceGroupName: 'rg-terraform'
                  backendAzureRmStorageAccountName: 'stconstososalesterraform'
                  backendAzureRmContainerName: 'infrastructure'
@@ -63,7 +63,7 @@ stages:
               inputs:
                  provider: azurerm
                  command: init
-                 backendServiceArm: 'PathikRawal'
+                 backendServiceArm: 'azure-devops'
                  backendAzureRmResourceGroupName: 'rg-terraform'
                  backendAzureRmStorageAccountName: 'stconstososalesterraform'
                  backendAzureRmContainerName: 'infrastructure'
@@ -83,7 +83,7 @@ stages:
               inputs:
                  provider: azurerm
                  command: init
-                 backendServiceArm: 'PathikRawal'
+                 backendServiceArm: 'azure-devops'
                  backendAzureRmResourceGroupName: 'rg-terraform'
                  backendAzureRmStorageAccountName: 'stconstososalesterraform'
                  backendAzureRmContainerName: 'infrastructure'
@@ -93,7 +93,7 @@ stages:
               inputs:
                  provider: 'azurerm'
                  command: plan
-                 environmentServiceNameAzureRM: 'PathikRawal'
+                 environmentServiceNameAzureRM: 'azure-devops'
                  #commandOptions: -input=false -var="objectid= $(TF_VAR_objectid)"
 
     - stage: 'Apply'
@@ -105,7 +105,7 @@ stages:
               inputs:
                  provider: azurerm
                  command: init
-                 backendServiceArm: 'PathikRawal'
+                 backendServiceArm: 'azure-devops'
                  backendAzureRmResourceGroupName: 'rg-terraform'
                  backendAzureRmStorageAccountName: 'stconstososalesterraform'
                  backendAzureRmContainerName: 'infrastructure'
@@ -115,4 +115,4 @@ stages:
               inputs:
                  provider: 'azurerm'
                  command: apply
-                 environmentServiceNameAzureRM: 'PathikRawal'
+                 environmentServiceNameAzureRM: 'azure-devops'
