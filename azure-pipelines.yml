@@ -96,6 +96,32 @@ stages:
                  environmentServiceNameAzureRM: 'azure-devops'
                  #commandOptions: -input=false -var="objectid= $(TF_VAR_objectid)"
 
+    - stage: ManualVerification
+      jobs:
+        - job: ManualVerification
+          steps:
+            - task: TerraformTaskV3@3
+              displayName: 'Terraform init'
+              inputs:
+                 provider: azurerm
+                 command: init
+                 backendServiceArm: 'azure-devops'
+                 backendAzureRmResourceGroupName: 'rg-terraform'
+                 backendAzureRmStorageAccountName: 'scopnatterraform'
+                 backendAzureRmContainerName: 'infrastructure'
+                 backendAzureRmKey: 'terraform.tfstate'
+            - task: TerraformTaskV3@3
+              displayName: 'Terraform Plan'
+              inputs:
+                 provider: 'azurerm'
+                 command: plan
+                 environmentServiceNameAzureRM: 'azure-devops'
+            - task: ManualIntervention@0
+              inputs:
+                instructions: 'Please review the terraform plan and approve or reject the changes'
+                timeoutInMinutes: 1440
+                inputs: 'Please review the terraform plan and approve or reject the changes'
+                
     - stage: 'Apply'
       jobs:
           - job: Apply
