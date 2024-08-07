@@ -7,7 +7,7 @@ variables:
     location: 'uksouth'
     terraformVersion: 1.2.7
     terraformGroup: 'rg-terraform-pr'
-    terraformStorageName: 'stconstososalesterraform'
+    terraformStorageName: 'scopnatterraform'
     terraformStorageSku: 'Standard_LRS'
     terraformContainerName: 'infrastructure'
     tfFilesArtifactName: 'tf-files'
@@ -45,7 +45,7 @@ stages:
                  command: init
                  backendServiceArm: 'PathikRawal'
                  backendAzureRmResourceGroupName: 'rg-terraform'
-                 backendAzureRmStorageAccountName: 'stconstososalesterraform'
+                 backendAzureRmStorageAccountName: 'scopnatterraform'
                  backendAzureRmContainerName: 'infrastructure'
                  backendAzureRmKey: 'terraform.tfstate'
             - task: TerraformTaskV3@3
@@ -65,7 +65,7 @@ stages:
                  command: init
                  backendServiceArm: 'PathikRawal'
                  backendAzureRmResourceGroupName: 'rg-terraform'
-                 backendAzureRmStorageAccountName: 'stconstososalesterraform'
+                 backendAzureRmStorageAccountName: 'scopnatterraform'
                  backendAzureRmContainerName: 'infrastructure'
                  backendAzureRmKey: 'terraform.tfstate'
             - task: TerraformTaskV3@3
@@ -85,7 +85,7 @@ stages:
                  command: init
                  backendServiceArm: 'PathikRawal'
                  backendAzureRmResourceGroupName: 'rg-terraform'
-                 backendAzureRmStorageAccountName: 'stconstososalesterraform'
+                 backendAzureRmStorageAccountName: 'scopnatterraform'
                  backendAzureRmContainerName: 'infrastructure'
                  backendAzureRmKey: 'terraform.tfstate'
             - task: TerraformTaskV3@3
@@ -107,7 +107,7 @@ stages:
                  command: init
                  backendServiceArm: 'PathikRawal'
                  backendAzureRmResourceGroupName: 'rg-terraform'
-                 backendAzureRmStorageAccountName: 'stconstososalesterraform'
+                 backendAzureRmStorageAccountName: 'scopnatterraform'
                  backendAzureRmContainerName: 'infrastructure'
                  backendAzureRmKey: 'terraform.tfstate'
             - task: TerraformTaskV3@3
