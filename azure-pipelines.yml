@@ -97,30 +97,20 @@ stages:
                  #commandOptions: -input=false -var="objectid= $(TF_VAR_objectid)"
 
     - stage: ManualVerification
+      dependsOn:
+        - Plan
+      condition: succeeded()
       jobs:
         - job: ManualVerification
+          displayName: "Check TF Plan"
+          timeoutInMinutes: 120
           steps:
-            - task: TerraformTaskV3@3
-              displayName: 'Terraform init'
+            - task: ManualValidation@0
+              timeoutInMinutes: 120
               inputs:
-                 provider: azurerm
-                 command: init
-                 backendServiceArm: 'azure-devops'
-                 backendAzureRmResourceGroupName: 'rg-terraform'
-                 backendAzureRmStorageAccountName: 'scopnatterraform'
-                 backendAzureRmContainerName: 'infrastructure'
-                 backendAzureRmKey: 'terraform.tfstate'
-            - task: TerraformTaskV3@3
-              displayName: 'Terraform Plan'
-              inputs:
-                 provider: 'azurerm'
-                 command: plan
-                 environmentServiceNameAzureRM: 'azure-devops'
-            - task: ManualIntervention@0
-              inputs:
-                instructions: 'Please review the terraform plan and approve or reject the changes'
-                timeoutInMinutes: 1440
-                inputs: 'Please review the terraform plan and approve or reject the changes'
+                notifyUsers: |
+                instructions: 'Please review the Terraform Plan and approve or reject the changes.'
+                onTimeout: 'reject'
                 
     - stage: 'Apply'
       jobs:
