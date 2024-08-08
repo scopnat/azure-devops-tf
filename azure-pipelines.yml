@@ -103,9 +103,9 @@ stages:
             steps:
             - task: ManualValidation@0
               timeoutInMinutes: 60
-              displayName: 'Manual Approval'
+              displayName: 'Manual Approval for terraform plan'
               inputs:
-               instructions: 'Please Validate'
+               instructions: 'Please review the Terraform plan and approve or reject the deployment'
 
     - stage: 'Apply'
       jobs:
@@ -126,4 +126,37 @@ stages:
               inputs:
                  provider: 'azurerm'
                  command: apply
+                 environmentServiceNameAzureRM: 'azure-devops'
+                 
+    - stage: ManualValidationDestroy
+      jobs:
+          - job: Manual_Validation
+            pool: server
+            steps:
+            - task: ManualValidation@0
+              timeoutInMinutes: 60
+              displayName: 'Manual Approval for terraform destroy'
+              inputs:
+               instructions: 'Please review the Terraform apply and destroy'
+    
+    - stage: 'Destroy'
+      jobs:
+          - job: Apply
+            steps:
+              
+            - task: TerraformTaskV3@3
+              displayName: 'Terraform init'
+              inputs:
+                 provider: azurerm
+                 command: init
+                 backendServiceArm: 'azure-devops'
+                 backendAzureRmResourceGroupName: 'rg-terraform'
+                 backendAzureRmStorageAccountName: 'scopnatterraform'
+                 backendAzureRmContainerName: 'infrastructure'
+                 backendAzureRmKey: 'terraform.tfstate'
+            - task: TerraformTaskV3@3
+              displayName: 'Terraform Destroy'
+              inputs:
+                 provider: 'azurerm'
+                 command: destroy
                  environmentServiceNameAzureRM: 'azure-devops'
