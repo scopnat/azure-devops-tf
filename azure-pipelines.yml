@@ -96,22 +96,17 @@ stages:
                  environmentServiceNameAzureRM: 'azure-devops'
                  #commandOptions: -input=false -var="objectid= $(TF_VAR_objectid)"
 
-    - stage: ManualVerification
-      dependsOn:
-        - Plan
-      condition: succeeded()
+    - stage: ManualValidation
       jobs:
-        - job: ManualVerification
-          displayName: "Check TF Plan"
-          timeoutInMinutes: 120
-          steps:
+          - job: Manual_Validation
+            pool: server
+            steps:
             - task: ManualValidation@0
-              timeoutInMinutes: 120
+              timeoutInMinutes: 60
+              displayName: 'Manual Approval'
               inputs:
-                notifyUsers: |
-                instructions: 'Please review the Terraform Plan and approve or reject the changes.'
-                onTimeout: 'reject'
-                
+               instructions: 'Please Validate'
+
     - stage: 'Apply'
       jobs:
           - job: Apply
