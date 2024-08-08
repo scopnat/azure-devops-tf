@@ -144,6 +144,16 @@ stages:
           - job: Destroy
             steps:
             - task: TerraformTaskV3@3
+              displayName: 'Terraform init'
+              inputs:
+                 provider: azurerm
+                 command: init
+                 backendServiceArm: 'azure-devops'
+                 backendAzureRmResourceGroupName: 'rg-terraform'
+                 backendAzureRmStorageAccountName: 'scopnatterraform'
+                 backendAzureRmContainerName: 'infrastructure'
+                 backendAzureRmKey: 'terraform.tfstate'            
+            - task: TerraformTaskV3@3
               displayName: 'Terraform Destroy'
               inputs:
                  provider: 'azurerm'
