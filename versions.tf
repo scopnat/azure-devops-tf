@@ -9,7 +9,7 @@ terraform {
     resource_group_name  = "rg-terraform"
     storage_account_name = "scopnatterraform"
     container_name       = "infrastructure"
-    key                  = "infra-dev.tfstate"
+    key                  = "infratf-dev.tfstate"
   }
   required_version = ">= 1.2.7"
 }
